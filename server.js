@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
+const materialRoutes = require('./routes/materialRoutes');
+const errorHandler = require('./utils/errorHandler');
 
 // Load env vars
 dotenv.config();
@@ -18,6 +20,12 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('Welcome to 3D-Printing-Materials Home');
 });
+
+// Mount routes
+app.use('/materials', materialRoutes);
+
+// Error handler middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
