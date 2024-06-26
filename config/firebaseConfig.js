@@ -3,11 +3,6 @@ const admin = require('firebase-admin');
 
 dotenv.config();
 
-console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID);
-console.log('FIREBASE_CLIENT_EMAIL:', process.env.FIREBASE_CLIENT_EMAIL);
-console.log('FIREBASE_PRIVATE_KEY length:', process.env.FIREBASE_PRIVATE_KEY?.length);
-console.log('FIREBASE_STORAGE_BUCKET:', process.env.FIREBASE_STORAGE_BUCKET);
-
 const serviceAccount = {
   "type": process.env.FIREBASE_TYPE,
   "project_id": process.env.FIREBASE_PROJECT_ID,
