@@ -52,28 +52,21 @@ exports.createMaterial = async (req, res, next) => {
     });
 
     stream.on('finish', async () => {
+      // Create a public URL for the file
+      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+
       const newMaterial = new Material({
         name,
         technology,
         colors,
         pricePerGram,
         applicationTypes,
-        imageUrl: fileName
+        imageUrl: publicUrl
       });
 
       await newMaterial.save();
-
-      // Dynamically generate the signed URL for the response
-      const [signedUrl] = await file.getSignedUrl({
-        action: 'read',
-        expires: '03-01-2500', // Adjust the expiration date as needed
-      });
-
-      // Replace the file path with the signed URL for the response
-      const materialResponse = await Material.findById(newMaterial._id);
-      materialResponse.imageUrl = signedUrl;
       
-      res.status(201).json(materialResponse);
+      res.status(201).json(newMaterial);
     });
 
     stream.end(req.file.buffer);
@@ -98,7 +91,8 @@ exports.updateMaterial = async (req, res, next) => {
       // Delete the old image if it exists
       if (material.imageUrl) {
         try {
-          await bucket.file(material.imageUrl).delete(); // Directly use material.imageUrl
+          const oldFileName = material.imageUrl.split('/').pop();
+          await bucket.file(oldFileName).delete();
         } catch (deleteError) {
           console.error('Error deleting old file:', deleteError);
           // Log the error but continue with the update
@@ -119,17 +113,10 @@ exports.updateMaterial = async (req, res, next) => {
       });
 
       stream.on('finish', async () => {
-        updateData.imageUrl = fileName;
+        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+        updateData.imageUrl = publicUrl;
 
         const updatedMaterial = await Material.findByIdAndUpdate(req.params.id, updateData, { new: true });
-
-        // Dynamically generate the signed URL for the response
-        const [signedUrl] = await bucket.file(updatedMaterial.imageUrl).getSignedUrl({
-          action: 'read',
-          expires: '03-01-2500', // Adjust the expiration date as needed
-        });
-        updatedMaterial.imageUrl = signedUrl; // Replace the file path with the signed URL for the response
-
         res.status(200).json(updatedMaterial);
       });
 
@@ -156,7 +143,8 @@ exports.deleteMaterial = async (req, res, next) => {
     // Delete the associated image from Firebase Storage
     if (material.imageUrl) {
       try {
-        await bucket.file(material.imageUrl).delete(); // Directly use material.imageUrl
+        const fileName = material.imageUrl.split('/').pop();
+        await bucket.file(fileName).delete();
       } catch (deleteError) {
         console.error('Error deleting file:', deleteError);
         // Continue with the deletion of the material even if file delete fails
@@ -169,4 +157,3 @@ exports.deleteMaterial = async (req, res, next) => {
     next(error);
   }
 };
-
