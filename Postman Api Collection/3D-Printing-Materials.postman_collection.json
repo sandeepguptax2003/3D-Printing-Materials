@@ -24,7 +24,7 @@
 					]
 				}
 			},
-			"response": []
+			"response": [Welcome to 3D-Printing-Materials Home]
 		},
 		{
 			"name": "Post a material",
@@ -79,7 +79,22 @@
 					]
 				}
 			},
-			"response": []
+			"response": [{
+    "name": "Resin",
+    "technology": "FDM",
+    "colors": [
+        "Red"
+    ],
+    "pricePerGram": 0.52,
+    "applicationTypes": [
+        "Prototyping"
+    ],
+    "imageUrl": "https://storage.googleapis.com/d-printing-materials.appspot.com/1719424654816_IMG-20231012-WA0003.jpg",
+    "_id": "667c568f2706d03b48da2925",
+    "createdAt": "2024-06-26T17:57:35.165Z",
+    "updatedAt": "2024-06-26T17:57:35.165Z",
+    "__v": 0
+}]
 		},
 		{
 			"name": "Get all materials",
@@ -99,7 +114,56 @@
 					]
 				}
 			},
-			"response": []
+			"response": [[
+    {
+        "_id": "667c563e2706d03b48da2921",
+        "name": "PLA",
+        "technology": "FDM",
+        "colors": [
+            "Red, Blue, Green"
+        ],
+        "pricePerGram": 0.3,
+        "applicationTypes": [
+            "Prototyping, Educational"
+        ],
+        "imageUrl": "https://storage.googleapis.com/d-printing-materials.appspot.com/1719424574090_IMG-20231012-WA0001.jpg",
+        "createdAt": "2024-06-26T17:56:14.596Z",
+        "updatedAt": "2024-06-26T17:56:14.596Z",
+        "__v": 0
+    },
+    {
+        "_id": "667c56742706d03b48da2923",
+        "name": "ABS",
+        "technology": "FDM",
+        "colors": [
+            "Red"
+        ],
+        "pricePerGram": 0.5,
+        "applicationTypes": [
+            "Prototyping"
+        ],
+        "imageUrl": "https://storage.googleapis.com/d-printing-materials.appspot.com/1719424628575_IMG-20231012-WA0002.jpg",
+        "createdAt": "2024-06-26T17:57:08.901Z",
+        "updatedAt": "2024-06-26T17:57:08.901Z",
+        "__v": 0
+    },
+    {
+        "_id": "667c568f2706d03b48da2925",
+        "name": "Resin",
+        "technology": "FDM",
+        "colors": [
+            "Red"
+        ],
+        "pricePerGram": 0.52,
+        "applicationTypes": [
+            "Prototyping"
+        ],
+        "imageUrl": "https://storage.googleapis.com/d-printing-materials.appspot.com/1719424654816_IMG-20231012-WA0003.jpg",
+        "createdAt": "2024-06-26T17:57:35.165Z",
+        "updatedAt": "2024-06-26T17:57:35.165Z",
+        "__v": 0
+    }
+]]
 		},
 		{
 			"name": "Get materials by ID",
@@ -120,7 +184,22 @@
 					]
 				}
 			},
-			"response": []
+			"response": [{
+    "_id": "667c568f2706d03b48da2925",
+    "name": "Resin",
+    "technology": "FDM",
+    "colors": [
+        "Red"
+    ],
+    "pricePerGram": 0.52,
+    "applicationTypes": [
+        "Prototyping"
+    ],
+    "imageUrl": "https://storage.googleapis.com/d-printing-materials.appspot.com/1719424654816_IMG-20231012-WA0003.jpg",
+    "createdAt": "2024-06-26T17:57:35.165Z",
+    "updatedAt": "2024-06-26T17:57:35.165Z",
+    "__v": 0
+}]
 		},
 		{
 			"name": "Update material",
@@ -176,7 +255,22 @@
 					]
 				}
 			},
-			"response": []
+			"response": [{
+    "_id": "667c568f2706d03b48da2925",
+    "name": "ABS",
+    "technology": "SLA",
+    "colors": [
+        "Black"
+    ],
+    "pricePerGram": 0.52,
+    "applicationTypes": [
+        "Prototyping"
+    ],
+    "imageUrl": "https://storage.googleapis.com/d-printing-materials.appspot.com/1719425064983_IMG-20231012-WA0004.jpg",
+    "createdAt": "2024-06-26T17:57:35.165Z",
+    "updatedAt": "2024-06-26T18:04:25.319Z",
+    "__v": 0
+}]
 		},
 		{
 			"name": "Delete material",
@@ -197,7 +291,9 @@
 					]
 				}
 			},
-			"response": []
+			"response": [{
+    "message": "Material deleted successfully"
+}]
 		}
 	]
 }
