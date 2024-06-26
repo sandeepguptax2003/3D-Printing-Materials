@@ -4,7 +4,7 @@ const { bucket } = require('../config/firebaseConfig');
 // GET all materials
 exports.getAllMaterials = async (req, res, next) => {
   try {
-    const materials = await Material.find().select('-imageUrl');
+    const materials = await Material.find();
     res.status(200).json(materials);
   } catch (error) {
     next(error);
@@ -28,7 +28,7 @@ exports.getMaterialById = async (req, res, next) => {
 exports.createMaterial = async (req, res, next) => {
   try {
     const { name, technology, colors, pricePerGram, applicationTypes } = req.body;
-    
+
     if (!req.file) {
       return res.status(400).json({ message: 'Image file is required' });
     }
@@ -47,20 +47,28 @@ exports.createMaterial = async (req, res, next) => {
     });
 
     stream.on('finish', async () => {
-      // Get the public URL of the uploaded file
-      const imageUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
-
       const newMaterial = new Material({
         name,
         technology,
         colors,
         pricePerGram,
         applicationTypes,
-        imageUrl
+        imageUrl: fileName
       });
 
       await newMaterial.save();
-      res.status(201).json(newMaterial);
+
+      // Dynamically generate the signed URL for the response
+      const [signedUrl] = await file.getSignedUrl({
+        action: 'read',
+        expires: '03-01-2500', // Adjust the expiration date as needed
+      });
+
+      // Replace the file path with the signed URL for the response
+      const materialResponse = await Material.findById(newMaterial._id);
+      materialResponse.imageUrl = signedUrl;
+      
+      res.status(201).json(materialResponse);
     });
 
     stream.end(req.file.buffer);
@@ -84,12 +92,11 @@ exports.updateMaterial = async (req, res, next) => {
     if (req.file) {
       // Delete the old image if it exists
       if (material.imageUrl) {
-        const oldFileName = material.imageUrl.split('/').pop();
         try {
-          await bucket.file(oldFileName).delete();
+          await bucket.file(material.imageUrl).delete(); // Directly use material.imageUrl
         } catch (deleteError) {
           console.error('Error deleting old file:', deleteError);
-          // Continue with the update even if delete fails
+          // Log the error but continue with the update
         }
       }
 
@@ -107,10 +114,17 @@ exports.updateMaterial = async (req, res, next) => {
       });
 
       stream.on('finish', async () => {
-        const imageUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
-        updateData.imageUrl = imageUrl;
+        updateData.imageUrl = fileName;
 
         const updatedMaterial = await Material.findByIdAndUpdate(req.params.id, updateData, { new: true });
+
+        // Dynamically generate the signed URL for the response
+        const [signedUrl] = await bucket.file(updatedMaterial.imageUrl).getSignedUrl({
+          action: 'read',
+          expires: '03-01-2500', // Adjust the expiration date as needed
+        });
+        updatedMaterial.imageUrl = signedUrl; // Replace the file path with the signed URL for the response
+
         res.status(200).json(updatedMaterial);
       });
 
@@ -129,16 +143,15 @@ exports.updateMaterial = async (req, res, next) => {
 exports.deleteMaterial = async (req, res, next) => {
   try {
     const material = await Material.findById(req.params.id);
-    
+
     if (!material) {
       return res.status(404).json({ message: 'Material not found' });
     }
 
     // Delete the associated image from Firebase Storage
     if (material.imageUrl) {
-      const fileName = material.imageUrl.split('/').pop();
       try {
-        await bucket.file(fileName).delete();
+        await bucket.file(material.imageUrl).delete(); // Directly use material.imageUrl
       } catch (deleteError) {
         console.error('Error deleting file:', deleteError);
         // Continue with the deletion of the material even if file delete fails
@@ -151,3 +164,4 @@ exports.deleteMaterial = async (req, res, next) => {
     next(error);
   }
 };
+
