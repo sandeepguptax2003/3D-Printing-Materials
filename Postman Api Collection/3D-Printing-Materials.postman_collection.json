@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "eccbe1db-3c72-4720-aac8-441bc05b66d2",
+		"name": "3D-Printing-Materials",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25446062"
+	},
+	"item": [
+		{
+			"name": "Home Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://threed-printing-materials.onrender.com/",
+					"protocol": "https",
+					"host": [
+						"threed-printing-materials",
+						"onrender",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a material",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "PLA",
+							"type": "text"
+						},
+						{
+							"key": "technology",
+							"value": "FDM",
+							"type": "text"
+						},
+						{
+							"key": "colors",
+							"value": "Red, Blue, Green",
+							"type": "text"
+						},
+						{
+							"key": "pricePerGram",
+							"value": "0.3",
+							"type": "text"
+						},
+						{
+							"key": "applicationTypes",
+							"value": "Prototyping, Educational",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "XFubcAOQh/IMG-20231012-WA0001.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://threed-printing-materials.onrender.com/materials",
+					"protocol": "https",
+					"host": [
+						"threed-printing-materials",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"materials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all materials",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://threed-printing-materials.onrender.com/materials",
+					"protocol": "https",
+					"host": [
+						"threed-printing-materials",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"materials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get materials by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://threed-printing-materials.onrender.com/materials/667c568f2706d03b48da2925",
+					"protocol": "https",
+					"host": [
+						"threed-printing-materials",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"materials",
+						"667c568f2706d03b48da2925"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update material",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "ABS",
+							"type": "text"
+						},
+						{
+							"key": "technology",
+							"value": "SLA",
+							"type": "text"
+						},
+						{
+							"key": "colors",
+							"value": "Black",
+							"type": "text"
+						},
+						{
+							"key": "pricePerGram",
+							"value": "0.52",
+							"type": "text"
+						},
+						{
+							"key": "applicationTypes",
+							"value": "Prototyping",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "oMVULkMkg/IMG-20231012-WA0004.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://threed-printing-materials.onrender.com/materials/667c568f2706d03b48da2925",
+					"protocol": "https",
+					"host": [
+						"threed-printing-materials",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"materials",
+						"667c568f2706d03b48da2925"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete material",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://threed-printing-materials.onrender.com/materials/667c568f2706d03b48da2925",
+					"protocol": "https",
+					"host": [
+						"threed-printing-materials",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"materials",
+						"667c568f2706d03b48da2925"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
