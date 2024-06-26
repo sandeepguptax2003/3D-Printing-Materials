@@ -40,6 +40,7 @@ The implemented features include:
 - **GET /materials**: Fetch all materials from the database.
 - **GET /materials/:id**: Retrieve a specific material by its ID, including its associated image.
 - **POST /materials**: Add a new material to the database, including an image upload.
+- [ Example fields for post method : name:FDA / technology:FDM / colors:Red, Black / pricePerGram:0.4 / applicationTypes:Educational / image:upload image from local system
 - **PUT /materials/:id**: Update an existing material's details, optionally updating its associated image.
 - **DELETE /materials/:id**: Remove a material from the database by its ID.
 
