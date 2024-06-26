@@ -5,6 +5,11 @@ const { bucket } = require('../config/firebaseConfig');
 exports.getAllMaterials = async (req, res, next) => {
   try {
     const materials = await Material.find();
+    if (materials.length === 0) {
+      return res.status(200).json({ 
+        message: "No materials available now. Please come back later. 😊"
+      });
+    }
     res.status(200).json(materials);
   } catch (error) {
     next(error);
