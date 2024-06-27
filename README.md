@@ -18,6 +18,13 @@ This project implements a robust backend API for managing 3D printing materials.
 
 The project utilizes MongoDB for data storage and Firebase Storage for handling image uploads. The goal is to create a scalable and efficient backend system that supports the core functionalities of managing 3D printing materials data.
 
+### Project Presentation Video
+<div align="center">
+  <a href="https://drive.google.com/file/d/10J8BfgND6XBuDjJSdj_hltdXKc0L3_Uy/preview">
+    <img src="https://img.youtube.com/vi/VIDEO_ID_HERE/0.jpg" alt="Project Presentation Video" style="width: 80%; max-width: 600px;">
+  </a>
+</div>
+
 ## Features
 
 The implemented features include:
